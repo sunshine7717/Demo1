@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbShopCarMapper">
+	<resultMap id="BaseResultMap" type="com.lanou.bean.TbShopCar">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="pro_id" jdbcType="INTEGER" property="proId" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="shop_num" jdbcType="INTEGER" property="shopNum" />
+		<result column="pro_size" jdbcType="VARCHAR" property="proSize" />
+		<result column="pro_color" jdbcType="VARCHAR" property="proColor" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, pro_id, user_id, shop_num, pro_size, pro_color
+	</sql>
+	<!-- 非自动生成 -->
+	<select id="selectBySomeInfo" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_shop_car
+		where pro_id = #{param1} and user_id = #{param2} and pro_size = #{param3} and pro_color = #{param4}
+	</select>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_shop_car
+		where user_id = #{userId}
+	</select>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_shop_car
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_shop_car
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lanou.bean.TbShopCar">
+		insert into tb_shop_car (ID,
+		pro_id, user_id,
+		shop_num, pro_size, pro_color
+		)
+		values
+		(#{id,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{shopNum,jdbcType=INTEGER},
+		#{proSize,jdbcType=VARCHAR}, #{proColor,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lanou.bean.TbShopCar">
+		insert into tb_shop_car
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proId != null">
+				pro_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="shopNum != null">
+				shop_num,
+			</if>
+			<if test="proSize != null">
+				pro_size,
+			</if>
+			<if test="proColor != null">
+				pro_color,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="proId != null">
+				#{proId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="shopNum != null">
+				#{shopNum,jdbcType=INTEGER},
+			</if>
+			<if test="proSize != null">
+				#{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proColor != null">
+				#{proColor,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbShopCar">
+		update tb_shop_car
+		<set>
+			<if test="proId != null">
+				pro_id = #{proId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="shopNum != null">
+				shop_num = #{shopNum,jdbcType=INTEGER},
+			</if>
+			<if test="proSize != null">
+				pro_size = #{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proColor != null">
+				pro_color = #{proColor,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbShopCar">
+		update tb_shop_car
+		set pro_id = #{proId,jdbcType=INTEGER},
+		user_id =
+		#{userId,jdbcType=INTEGER},
+		shop_num = #{shopNum,jdbcType=INTEGER},
+		pro_size = #{proSize,jdbcType=VARCHAR},
+		pro_color =
+		#{proColor,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

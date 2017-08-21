@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbProInfoSizeMapper">
+	<resultMap id="BaseResultMap" type="com.lanou.bean.TbProInfoSize">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="pro_size" jdbcType="VARCHAR" property="proSize" />
+		<result column="pro_id" jdbcType="INTEGER" property="proId" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, pro_size, pro_id
+	</sql>
+	<!-- 非自动生成 -->
+	<!-- 通过产品ID和商品和尺码查询商品尺码是否存在 -->
+	<select id="selectByProIdAndProSize" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_pro_info_size
+		where pro_size = #{pro_size} and pro_id = #{pro_id}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_pro_info_size
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_pro_info_size
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lanou.bean.TbProInfoSize">
+		insert into tb_pro_info_size
+		(ID, pro_size, pro_id
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{proSize,jdbcType=VARCHAR},
+		#{proId,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lanou.bean.TbProInfoSize">
+		insert into tb_pro_info_size
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proSize != null">
+				pro_size,
+			</if>
+			<if test="proId != null">
+				pro_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="proSize != null">
+				#{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proId != null">
+				#{proId,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbProInfoSize">
+		update tb_pro_info_size
+		<set>
+			<if test="proSize != null">
+				pro_size = #{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proId != null">
+				pro_id = #{proId,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbProInfoSize">
+		update
+		tb_pro_info_size
+		set pro_size = #{proSize,jdbcType=VARCHAR},
+		pro_id =
+		#{proId,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

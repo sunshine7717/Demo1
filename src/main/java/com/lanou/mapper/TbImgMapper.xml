@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbImgMapper">
+  <resultMap id="BaseResultMap" type="com.lanou.bean.TbImg">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="img_name" jdbcType="VARCHAR" property="imgName" />
+    <result column="pro_imgurl" jdbcType="VARCHAR" property="proImgurl" />
+    <result column="pro_id" jdbcType="INTEGER" property="proId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, img_name, pro_imgurl, pro_id
+  </sql>
+   <select id="selectImgByProId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  pro_imgurl from tb_img
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_img
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_img
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanou.bean.TbImg">
+    insert into tb_img (ID, img_name, pro_imgurl, 
+      pro_id)
+    values (#{id,jdbcType=INTEGER}, #{imgName,jdbcType=VARCHAR}, #{proImgurl,jdbcType=VARCHAR}, 
+      #{proId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanou.bean.TbImg">
+    insert into tb_img
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="imgName != null">
+        img_name,
+      </if>
+      <if test="proImgurl != null">
+        pro_imgurl,
+      </if>
+      <if test="proId != null">
+        pro_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="imgName != null">
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="proImgurl != null">
+        #{proImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null">
+        #{proId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbImg">
+    update tb_img
+    <set>
+      <if test="imgName != null">
+        img_name = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="proImgurl != null">
+        pro_imgurl = #{proImgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="proId != null">
+        pro_id = #{proId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbImg">
+    update tb_img
+    set img_name = #{imgName,jdbcType=VARCHAR},
+      pro_imgurl = #{proImgurl,jdbcType=VARCHAR},
+      pro_id = #{proId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

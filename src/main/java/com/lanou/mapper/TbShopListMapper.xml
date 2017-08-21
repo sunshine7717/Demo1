@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbShopListMapper">
+	<resultMap id="BaseResultMap" type="com.lanou.bean.TbShopList">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="pro_id" jdbcType="INTEGER" property="proId" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="shop_num" jdbcType="INTEGER" property="shopNum" />
+		<result column="pro_size" jdbcType="VARCHAR" property="proSize" />
+		<result column="pro_color" jdbcType="VARCHAR" property="proColor" />
+		<result column="is_pay" jdbcType="INTEGER" property="isPay" />
+		<result column="add_id" jdbcType="INTEGER" property="addId" />
+		<result column="is_send" jdbcType="INTEGER" property="isSend" />
+		<result column="is_show" jdbcType="INTEGER" property="isShow" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, pro_id, user_id, shop_num, pro_size, pro_color, is_pay,
+		add_id,
+		is_send, is_show
+	</sql>
+	<select id="seleteshoplist" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from
+		tb_shop_list
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_shop_list
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_shop_list
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lanou.bean.TbShopList">
+		insert into tb_shop_list (ID,
+		pro_id, user_id,
+		shop_num, pro_size, pro_color,
+		is_pay, add_id, is_send,
+		is_show)
+		values (#{id,jdbcType=INTEGER}, #{proId,jdbcType=INTEGER},
+		#{userId,jdbcType=INTEGER},
+		#{shopNum,jdbcType=INTEGER},
+		#{proSize,jdbcType=VARCHAR}, #{proColor,jdbcType=VARCHAR},
+		#{isPay,jdbcType=INTEGER}, #{addId,jdbcType=INTEGER},
+		#{isSend,jdbcType=INTEGER},
+		#{isShow,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.lanou.bean.TbShopList">
+		insert into tb_shop_list
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="proId != null">
+				pro_id,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="shopNum != null">
+				shop_num,
+			</if>
+			<if test="proSize != null">
+				pro_size,
+			</if>
+			<if test="proColor != null">
+				pro_color,
+			</if>
+			<if test="isPay != null">
+				is_pay,
+			</if>
+			<if test="addId != null">
+				add_id,
+			</if>
+			<if test="isSend != null">
+				is_send,
+			</if>
+			<if test="isShow != null">
+				is_show,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="proId != null">
+				#{proId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="shopNum != null">
+				#{shopNum,jdbcType=INTEGER},
+			</if>
+			<if test="proSize != null">
+				#{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proColor != null">
+				#{proColor,jdbcType=VARCHAR},
+			</if>
+			<if test="isPay != null">
+				#{isPay,jdbcType=INTEGER},
+			</if>
+			<if test="addId != null">
+				#{addId,jdbcType=INTEGER},
+			</if>
+			<if test="isSend != null">
+				#{isSend,jdbcType=INTEGER},
+			</if>
+			<if test="isShow != null">
+				#{isShow,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbShopList">
+		update tb_shop_list
+		<set>
+			<if test="proId != null">
+				pro_id = #{proId,jdbcType=INTEGER},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="shopNum != null">
+				shop_num = #{shopNum,jdbcType=INTEGER},
+			</if>
+			<if test="proSize != null">
+				pro_size = #{proSize,jdbcType=VARCHAR},
+			</if>
+			<if test="proColor != null">
+				pro_color = #{proColor,jdbcType=VARCHAR},
+			</if>
+			<if test="isPay != null">
+				is_pay = #{isPay,jdbcType=INTEGER},
+			</if>
+			<if test="addId != null">
+				add_id = #{addId,jdbcType=INTEGER},
+			</if>
+			<if test="isSend != null">
+				is_send = #{isSend,jdbcType=INTEGER},
+			</if>
+			<if test="isShow != null">
+				is_show = #{isShow,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbShopList">
+		update
+		tb_shop_list
+		set pro_id = #{proId,jdbcType=INTEGER},
+		user_id =
+		#{userId,jdbcType=INTEGER},
+		shop_num = #{shopNum,jdbcType=INTEGER},
+		pro_size = #{proSize,jdbcType=VARCHAR},
+		pro_color =
+		#{proColor,jdbcType=VARCHAR},
+		is_pay = #{isPay,jdbcType=INTEGER},
+		add_id = #{addId,jdbcType=INTEGER},
+		is_send =
+		#{isSend,jdbcType=INTEGER},
+		is_show = #{isShow,jdbcType=INTEGER}
+		where
+		ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateIsSend" parameterType="com.lanou.bean.TbShopList">
+		update tb_shop_list
+		set
+		is_send = #{isSend,jdbcType=INTEGER}
+		where user_id =
+		#{userId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateIsShow" parameterType="com.lanou.bean.TbShopList">
+		update tb_shop_list
+		set
+		is_show = #{isShow,jdbcType=INTEGER}
+		where user_id =
+		#{userId,jdbcType=INTEGER}
+	</update>
+
+    <update id="updateIsPay" parameterType="com.lanou.bean.TbShopList">
+		update tb_shop_list
+		set
+		is_pay = #{isPay,jdbcType=INTEGER}
+		where user_id =
+		#{userId,jdbcType=INTEGER}
+	</update>
+
+</mapper>

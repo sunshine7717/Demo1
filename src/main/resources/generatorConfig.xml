@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\maven/local/mysql/mysql-connector-java/5.1.40/mysql-connector-java-5.1.40.jar" />
+	<context id="context1">
+		<commentGenerator>
+			<!-- 忽略所有的注释内容 -->
+			<property name="suppressAllComments" value="true" />
+			<!-- 忽略所有的注释时间 -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+
+		<jdbcConnection connectionURL="jdbc:mysql://localhost:3306/cp"
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+		<!-- bean生成的包位置 -->
+		<javaModelGenerator targetPackage="com.lanou.bean"
+			targetProject="Demo1/src/main/java" />
+		<!-- xml文件生成的位置 -->
+		<sqlMapGenerator targetPackage="com.lanou.mapper"
+			targetProject="Demo1/src/main/java" />
+		<!-- interface生成的位置 -->
+		<javaClientGenerator targetPackage="com.lanou.mapper"
+			targetProject="Demo1/src/main/java" type="XMLMAPPER" />
+		<!-- 数据库表名 -->
+		<table tableName="tb_shop_list" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_user_info" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_user_address" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_user" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_img" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+		<table tableName="tb_pro_type_1" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" />
+	</context>
+</generatorConfiguration>

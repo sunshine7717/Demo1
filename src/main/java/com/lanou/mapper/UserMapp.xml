@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.lanou.bean.User">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pass" jdbcType="VARCHAR" property="userPass" />
+    <result column="user_time" jdbcType="TIMESTAMP" property="userTime" />
+       <result column="user_phonenum" jdbcType="VARCHAR" property="userPhonenum" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+    <result column="user_add" jdbcType="VARCHAR" property="userAdd" /> 
+  </resultMap>
+      <select id="userselect" resultMap="BaseResultMap">
+ select  tb_user.*,tb_user_address.user_add,tb_user_info.user_phonenum,tb_user_info.user_sex,tb_user_info.user_email from tb_user,tb_user_address,tb_user_info where tb_user.id=tb_user_address.user_id 
+and tb_user_info.user_id =tb_user.id and tb_user.user_name=#{username,jdbcType=VARCHAR}
+  </select>
+  </mapper>

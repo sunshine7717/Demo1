@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbUserInfoMapper">
+	<resultMap id="BaseResultMap" type="com.lanou.bean.TbUserInfo">
+		<id column="ID" jdbcType="INTEGER" property="id" />
+		<result column="user_phonenum" jdbcType="VARCHAR" property="userPhonenum" />
+		<result column="user_sex" jdbcType="INTEGER" property="userSex" />
+		<result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+		<result column="user_id" jdbcType="INTEGER" property="userId" />
+		<result column="user_address" jdbcType="VARCHAR" property="userAddress" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, user_phonenum, user_sex, user_email, user_id, user_address
+	</sql>
+
+	<update id="updateuserid" parameterType="com.lanou.bean.TbUserInfo">
+		update tb_user_info
+		set user_phonenum = #{userPhonenum,jdbcType=VARCHAR},
+		user_email = #{userEmail,jdbcType=VARCHAR}
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="seleteUserInfo" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select user_phonenum,user_address from tb_user_info
+		where user_id = #{userId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_user_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from tb_user_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.lanou.bean.TbUserInfo">
+		insert into tb_user_info (ID, user_phonenum, user_sex,
+		user_email, user_id, user_address
+		)
+		values (#{id,jdbcType=INTEGER}, #{userPhonenum,jdbcType=VARCHAR},
+		#{userSex,jdbcType=INTEGER},
+		#{userEmail,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{userAddress,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.lanou.bean.TbUserInfo">
+		insert into tb_user_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="userPhonenum != null">
+				user_phonenum,
+			</if>
+			<if test="userSex != null">
+				user_sex,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userAddress != null">
+				user_address,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="userPhonenum != null">
+				#{userPhonenum,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				#{userSex,jdbcType=INTEGER},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userAddress != null">
+				#{userAddress,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbUserInfo">
+		update tb_user_info
+		<set>
+			<if test="userPhonenum != null">
+				user_phonenum = #{userPhonenum,jdbcType=VARCHAR},
+			</if>
+			<if test="userSex != null">
+				user_sex = #{userSex,jdbcType=INTEGER},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userAddress != null">
+				user_address = #{userAddress,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbUserInfo">
+		update tb_user_info
+		set user_phonenum = #{userPhonenum,jdbcType=VARCHAR},
+		user_sex = #{userSex,jdbcType=INTEGER},
+		user_email = #{userEmail,jdbcType=VARCHAR},
+		user_id = #{userId,jdbcType=INTEGER},
+		user_address = #{userAddress,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

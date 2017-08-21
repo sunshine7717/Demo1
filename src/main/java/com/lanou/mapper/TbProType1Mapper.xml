@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanou.mapper.TbProType1Mapper">
+  <resultMap id="BaseResultMap" type="com.lanou.bean.TbProType1">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="pro_typename1" jdbcType="VARCHAR" property="proTypename1" />
+    <result column="fid" jdbcType="INTEGER" property="fid" />
+    <result column="fname" jdbcType="VARCHAR" property="fname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, pro_typename1, fid, fname
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_pro_type_1
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_pro_type_1
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanou.bean.TbProType1">
+    insert into tb_pro_type_1 (ID, pro_typename1, fid, 
+      fname)
+    values (#{id,jdbcType=INTEGER}, #{proTypename1,jdbcType=VARCHAR}, #{fid,jdbcType=INTEGER}, 
+      #{fname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lanou.bean.TbProType1">
+    insert into tb_pro_type_1
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="proTypename1 != null">
+        pro_typename1,
+      </if>
+      <if test="fid != null">
+        fid,
+      </if>
+      <if test="fname != null">
+        fname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="proTypename1 != null">
+        #{proTypename1,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null">
+        #{fname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lanou.bean.TbProType1">
+    update tb_pro_type_1
+    <set>
+      <if test="proTypename1 != null">
+        pro_typename1 = #{proTypename1,jdbcType=VARCHAR},
+      </if>
+      <if test="fid != null">
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null">
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lanou.bean.TbProType1">
+    update tb_pro_type_1
+    set pro_typename1 = #{proTypename1,jdbcType=VARCHAR},
+      fid = #{fid,jdbcType=INTEGER},
+      fname = #{fname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
